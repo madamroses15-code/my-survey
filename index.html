@@ -1,0 +1,519 @@
+index.html<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบสำรวจความต้องการสนับสนุนเพิ่มเติมจากฝ่าย Admin Support</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f3f4;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            overflow: hidden;
+        }
+        
+        .form-header {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: white;
+            padding: 40px 24px;
+            text-align: center;
+        }
+        
+        .form-title {
+            font-size: 28px;
+            font-weight: 400;
+            margin: 0 0 16px 0;
+            line-height: 1.3;
+        }
+        
+        .form-description {
+            font-size: 14px;
+            opacity: 0.95;
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .form-content {
+            padding: 24px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 2px solid #e8eaed;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #1a73e8;
+            margin: 0 0 8px 0;
+        }
+        
+        .section-description {
+            font-size: 14px;
+            color: #5f6368;
+            margin: 0 0 24px 0;
+            font-style: italic;
+        }
+        
+        .question-group {
+            margin-bottom: 32px;
+        }
+        
+        .question-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #202124;
+            margin: 0 0 8px 0;
+            line-height: 1.4;
+        }
+        
+        .required {
+            color: #d93025;
+        }
+        
+        .question-purpose {
+            font-size: 13px;
+            color: #5f6368;
+            margin: 0 0 16px 0;
+            padding: 12px;
+            background: #f8f9fa;
+            border-left: 4px solid #1a73e8;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 1px #1a73e8;
+        }
+        
+        .textarea-field {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            padding: 12px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .radio-option:hover, .checkbox-option:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .radio-option input, .checkbox-option input {
+            margin: 4px 0 0 0;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        .radio-option label, .checkbox-option label {
+            cursor: pointer;
+            font-size: 14px;
+            color: #202124;
+            line-height: 1.4;
+        }
+        
+        .other-input {
+            margin-top: 8px;
+            margin-left: 24px;
+            display: none;
+        }
+        
+        .validation-message {
+            color: #d93025;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+        
+        .submit-section {
+            padding: 24px;
+            background: #f8f9fa;
+            border-top: 1px solid #e8eaed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .submit-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .submit-btn:hover {
+            background: #1557b0;
+        }
+        
+        .clear-btn {
+            background: none;
+            color: #1a73e8;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .clear-btn:hover {
+            background: #f1f3f4;
+        }
+        
+        .success-message {
+            display: none;
+            background: #e8f5e8;
+            color: #137333;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .checkbox-counter {
+            font-size: 12px;
+            color: #5f6368;
+            margin-top: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-container {
+                margin: 0;
+                border-radius: 0;
+            }
+            
+            .form-title {
+                font-size: 24px;
+            }
+            
+            .submit-section {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1 class="form-title">แบบสำรวจความต้องการสนับสนุนเพิ่มเติมจากฝ่าย Admin Support</h1>
+            <p class="form-description">เพื่อพัฒนาการบริการเชิงรุก และสนับสนุนการทำงานของท่านให้ดียิ่งขึ้น หน่วยงาน Admin Support ขอรวบรวมความต้องการเพิ่มเติมจากบริการที่เรามีอยู่ในปัจจุบัน ความคิดเห็นของท่านจะถูกนำไปใช้ในการวางแผนปรับปรุงการบริการในไตรมาสถัดไป</p>
+        </div>
+        
+        <div class="form-content">
+            <div class="success-message" id="successMessage">
+                ✅ ขอขอบคุณสำหรับข้อเสนอแนะอันเป็นประโยชน์ ทีมงาน Admin Support จะนำข้อมูลของท่านไปพิจารณาเพื่อวางแผนและพัฒนาการบริการให้ดียิ่งขึ้นต่อไป
+            </div>
+            
+            <form id="adminSupportForm">
+                <!-- Section 1: ข้อมูลเบื้องต้น -->
+                <div class="section">
+                    <h2 class="section-title">Section 1: ข้อมูลเบื้องต้น</h2>
+                    <p class="section-description">กรุณากรอกข้อมูลเพื่อประโยชน์ในการวิเคราะห์ข้อมูล</p>
+                    
+                    <div class="question-group">
+                        <h3 class="question-title">แผนก/ฝ่าย <span class="required">*</span></h3>
+                        <input type="text" class="input-field" name="department" required placeholder="กรุณาระบุแผนก/ฝ่ายของท่าน">
+                    </div>
+                </div>
+
+                <!-- Section 2: ความต้องการสนับสนุนเพิ่มเติม -->
+                <div class="section">
+                    <h2 class="section-title">Section 2: ความต้องการสนับสนุนเพิ่มเติม</h2>
+                    <p class="section-description">โปรดเลือกคำตอบที่ตรงกับความต้องการของท่านมากที่สุด</p>
+                    
+                    <div class="question-group">
+                        <h3 class="question-title">1. นอกเหนือจากการจองห้องประชุมตามปกติ หาก Admin Support มีบริการ "ช่วยเตรียมความพร้อมสำหรับการประชุม" ท่านต้องการให้เราสนับสนุนด้านใดเป็นพิเศษ? (เลือกได้สูงสุด 2 ข้อ) <span class="required">*</span></h3>
+                        <p class="question-purpose"><strong>วัตถุประสงค์:</strong> ต่อยอดจากการบริการ "จองห้องประชุม" ไปสู่บริการที่ครบวงจรมากขึ้น เพื่อลดภาระให้พนักงาน</p>
+                        
+                        <div class="checkbox-group" id="meetingSupport">
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="meeting1" name="meetingSupport" value="การจัดเตรียมและทดสอบอุปกรณ์นำเสนอล่วงหน้า">
+                                <label for="meeting1">การจัดเตรียมและทดสอบอุปกรณ์นำเสนอล่วงหน้า (เช่น โปรเจคเตอร์, ระบบวิดีโอคอนเฟอเรนซ์)</label>
+                            </div>
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="meeting2" name="meetingSupport" value="การจัดเตรียมเอกสารประกอบการประชุม">
+                                <label for="meeting2">การจัดเตรียมเอกสารประกอบการประชุม (เช่น พิมพ์และจัดชุดเอกสาร)</label>
+                            </div>
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="meeting3" name="meetingSupport" value="การประสานงานจัดเตรียมเครื่องดื่ม/อาหารว่าง">
+                                <label for="meeting3">การประสานงานจัดเตรียมเครื่องดื่ม/อาหารว่างสำหรับการประชุม</label>
+                            </div>
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="meeting4" name="meetingSupport" value="การจัดผังห้องประชุมให้เหมาะสม">
+                                <label for="meeting4">การจัดผังห้องประชุมให้เหมาะสมกับรูปแบบการประชุม (เช่น แบบ U-Shape, Classroom)</label>
+                            </div>
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="meeting5" name="meetingSupport" value="อื่นๆ">
+                                <label for="meeting5">อื่นๆ (โปรดระบุ)</label>
+                            </div>
+                        </div>
+                        <div class="other-input" id="meetingOther">
+                            <input type="text" class="input-field" name="meetingSupportOther" placeholder="โปรดระบุ...">
+                        </div>
+                        <div class="checkbox-counter" id="meetingCounter">เลือกแล้ว: 0/2 ข้อ</div>
+                        <div class="validation-message" id="meetingValidation">กรุณาเลือกอย่างน้อย 1 ข้อ และไม่เกิน 2 ข้อ</div>
+                    </div>
+
+                    <div class="question-group">
+                        <h3 class="question-title">2. เพื่อให้การเบิกจ่ายพัสดุและอุปกรณ์สำนักงานมีประสิทธิภาพยิ่งขึ้น ท่านต้องการให้มีบริการหรือข้อมูลใดเพิ่มเติมมากที่สุด? <span class="required">*</span></h3>
+                        <p class="question-purpose"><strong>วัตถุประสงค์:</strong> หาแนวทางปรับปรุงกระบวนการเบิกจ่าย โดยเน้นการให้ข้อมูลเชิงรุกและลดขั้นตอนที่ซ้ำซ้อน</p>
+                        
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="supply1" name="supplyImprovement" value="ระบบออนไลน์สำหรับตรวจสอบสต็อกแบบ Real-time" required>
+                                <label for="supply1">ระบบออนไลน์สำหรับตรวจสอบสต็อกของกลางแบบ Real-time</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="supply2" name="supplyImprovement" value="รายการแนะนำอุปกรณ์มาตรฐานตามหลักสรีรศาสตร์">
+                                <label for="supply2">รายการแนะนำอุปกรณ์มาตรฐานตามหลักสรีรศาสตร์ (Ergonomics)</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="supply3" name="supplyImprovement" value="บริการให้คำปรึกษา/จัดหาอุปกรณ์เฉพาะทาง">
+                                <label for="supply3">บริการให้คำปรึกษา/จัดหาอุปกรณ์สำนักงานเฉพาะทางสำหรับโปรเจกต์พิเศษ</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="supply4" name="supplyImprovement" value="รอบการจัดส่งอุปกรณ์ไปยังโต๊ะทำงานโดยตรง">
+                                <label for="supply4">รอบการจัดส่งอุปกรณ์ไปยังโต๊ะทำงานโดยตรง เพื่อลดเวลาในการเดินมาเบิก</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="supply5" name="supplyImprovement" value="อื่นๆ">
+                                <label for="supply5">อื่นๆ (โปรดระบุ)</label>
+                            </div>
+                        </div>
+                        <div class="other-input" id="supplyOther">
+                            <input type="text" class="input-field" name="supplyImprovementOther" placeholder="โปรดระบุ...">
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <h3 class="question-title">3. ในด้านการประสานงานอาคารสถานที่ หากมีบริการ "ตรวจเช็คพื้นที่ทำงานเชิงรุก" ท่านอยากให้เราให้ความสำคัญกับเรื่องใดเป็นอันดับแรก? <span class="required">*</span></h3>
+                        <p class="question-purpose"><strong>วัตถุประสงค์:</strong> เปลี่ยนจากการรอ "แจ้งซ่อม" เป็นการเข้าไปดูแลและป้องกันปัญหาล่วงหน้า</p>
+                        
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="facility1" name="facilityPriority" value="การตรวจสอบและจัดระเบียบสายไฟ/ปลั๊กไฟเพื่อความปลอดภัย" required>
+                                <label for="facility1">การตรวจสอบและจัดระเบียบสายไฟ/ปลั๊กไฟเพื่อความปลอดภัย</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="facility2" name="facilityPriority" value="การตรวจสอบสภาพเฟอร์นิเจอร์และอุปกรณ์สำนักงาน">
+                                <label for="facility2">การตรวจสอบสภาพเฟอร์นิเจอร์และอุปกรณ์สำนักงาน (เช่น เก้าอี้, โต๊ะ) ให้อยู่ในสภาพพร้อมใช้งาน</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="facility3" name="facilityPriority" value="การตรวจสอบความสว่างและอุณหภูมิในพื้นที่ทำงาน">
+                                <label for="facility3">การตรวจสอบความสว่างและอุณหภูมิในพื้นที่ทำงานให้เหมาะสม</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="facility4" name="facilityPriority" value="การตรวจสอบและดูแลความสะอาดเรียบร้อยในพื้นที่ส่วนกลาง">
+                                <label for="facility4">การตรวจสอบและดูแลความสะอาดเรียบร้อยในพื้นที่ส่วนกลางเป็นพิเศษ</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="facility5" name="facilityPriority" value="อื่นๆ">
+                                <label for="facility5">อื่นๆ (โปรดระบุ)</label>
+                            </div>
+                        </div>
+                        <div class="other-input" id="facilityOther">
+                            <input type="text" class="input-field" name="facilityPriorityOther" placeholder="โปรดระบุ...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: ข้อเสนอแนะเพื่อการพัฒนา -->
+                <div class="section">
+                    <h2 class="section-title">Section 3: ข้อเสนอแนะเพื่อการพัฒนา</h2>
+                    <p class="section-description">ความคิดเห็นของท่านมีค่าอย่างยิ่งต่อการพัฒนาบริการของเรา</p>
+                    
+                    <div class="question-group">
+                        <h3 class="question-title">4. จากบริการทั้งหมดของ Admin Support มีกระบวนการหรือขั้นตอนใดที่ท่านรู้สึกว่า "สามารถทำให้ง่ายขึ้น" หรือ "เป็นระบบดิจิทัล" ได้อีกบ้าง?</h3>
+                        <p class="question-purpose"><strong>วัตถุประสงค์:</strong> รวบรวมไอเดียในการปรับปรุงกระบวนการทำงานและนำเทคโนโลยีมาใช้</p>
+                        <textarea class="input-field textarea-field" name="processImprovement" placeholder="กรุณาแชร์ความคิดเห็นของท่าน..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <h3 class="question-title">5. หากท่านสามารถเสนอ "บริการใหม่" 1 อย่างที่อยากให้ Admin Support ทำให้ เพื่อช่วยให้การทำงานของท่านสะดวกสบายและมีประสิทธิภาพมากขึ้น บริการนั้นคืออะไร?</h3>
+                        <p class="question-purpose"><strong>วัตถุประสงค์:</strong> เปิดโอกาสให้พนักงานได้แสดงความคิดเห็นและความต้องการที่ยังไม่เคยถูกค้นพบ (Unmet Needs)</p>
+                        <textarea class="input-field textarea-field" name="newServiceIdea" placeholder="กรุณาแชร์ไอเดียบริการใหม่ของท่าน..."></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="submit-section">
+            <button type="button" class="clear-btn" onclick="clearForm()">ล้างแบบฟอร์ม</button>
+            <button type="submit" class="submit-btn" form="adminSupportForm">ส่งแบบสำรวจ</button>
+        </div>
+    </div>
+
+    <script>
+        // จัดการ checkbox ที่เลือกได้สูงสุด 2 ข้อ
+        const meetingCheckboxes = document.querySelectorAll('input[name="meetingSupport"]');
+        const meetingCounter = document.getElementById('meetingCounter');
+        const meetingValidation = document.getElementById('meetingValidation');
+        const meetingOther = document.getElementById('meetingOther');
+
+        meetingCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checkedBoxes = document.querySelectorAll('input[name="meetingSupport"]:checked');
+                const count = checkedBoxes.length;
+                
+                meetingCounter.textContent = `เลือกแล้ว: ${count}/2 ข้อ`;
+                
+                if (count > 2) {
+                    this.checked = false;
+                    meetingValidation.style.display = 'block';
+                    meetingValidation.textContent = 'เลือกได้สูงสุด 2 ข้อเท่านั้น';
+                } else {
+                    meetingValidation.style.display = 'none';
+                }
+
+                // แสดง/ซ่อนช่องอื่นๆ
+                if (document.getElementById('meeting5').checked) {
+                    meetingOther.style.display = 'block';
+                } else {
+                    meetingOther.style.display = 'none';
+                }
+            });
+        });
+
+        // จัดการ radio button อื่นๆ สำหรับคำถามที่ 2
+        const supplyRadios = document.querySelectorAll('input[name="supplyImprovement"]');
+        const supplyOther = document.getElementById('supplyOther');
+
+        supplyRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (document.getElementById('supply5').checked) {
+                    supplyOther.style.display = 'block';
+                } else {
+                    supplyOther.style.display = 'none';
+                }
+            });
+        });
+
+        // จัดการ radio button อื่นๆ สำหรับคำถามที่ 3
+        const facilityRadios = document.querySelectorAll('input[name="facilityPriority"]');
+        const facilityOther = document.getElementById('facilityOther');
+
+        facilityRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (document.getElementById('facility5').checked) {
+                    facilityOther.style.display = 'block';
+                } else {
+                    facilityOther.style.display = 'none';
+                }
+            });
+        });
+
+        // จัดการการส่งฟอร์ม
+        document.getElementById('adminSupportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // ตรวจสอบ checkbox ที่เลือกได้สูงสุด 2 ข้อ
+            const checkedMeeting = document.querySelectorAll('input[name="meetingSupport"]:checked');
+            if (checkedMeeting.length === 0 || checkedMeeting.length > 2) {
+                meetingValidation.style.display = 'block';
+                meetingValidation.textContent = 'กรุณาเลือกอย่างน้อย 1 ข้อ และไม่เกิน 2 ข้อ';
+                document.getElementById('meetingSupport').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            // เก็บข้อมูลจากฟอร์ม
+            const formData = new FormData(this);
+            const data = {};
+            
+            data.department = formData.get('department');
+            data.meetingSupport = formData.getAll('meetingSupport');
+            data.meetingSupportOther = formData.get('meetingSupportOther');
+            data.supplyImprovement = formData.get('supplyImprovement');
+            data.supplyImprovementOther = formData.get('supplyImprovementOther');
+            data.facilityPriority = formData.get('facilityPriority');
+            data.facilityPriorityOther = formData.get('facilityPriorityOther');
+            data.processImprovement = formData.get('processImprovement');
+            data.newServiceIdea = formData.get('newServiceIdea');
+            
+            // แสดงข้อความสำเร็จ
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // เลื่อนไปที่ข้อความสำเร็จ
+            document.getElementById('successMessage').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+            
+            // ล้างฟอร์ม
+            setTimeout(() => {
+                this.reset();
+                meetingCounter.textContent = 'เลือกแล้ว: 0/2 ข้อ';
+                meetingOther.style.display = 'none';
+                supplyOther.style.display = 'none';
+                facilityOther.style.display = 'none';
+            }, 1000);
+            
+            // ซ่อนข้อความสำเร็จหลัง 8 วินาที
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 8000);
+            
+            console.log('ข้อมูลแบบสำรวจ Admin Support:', data);
+        });
+        
+        function clearForm() {
+            if (confirm('คุณต้องการล้างข้อมูลทั้งหมดใช่หรือไม่?')) {
+                document.getElementById('adminSupportForm').reset();
+                document.getElementById('successMessage').style.display = 'none';
+                meetingCounter.textContent = 'เลือกแล้ว: 0/2 ข้อ';
+                meetingValidation.style.display = 'none';
+                meetingOther.style.display = 'none';
+                supplyOther.style.display = 'none';
+                facilityOther.style.display = 'none';
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984aec7cd039a9f9',t:'MTc1ODgwNzUyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
