@@ -1,519 +1,413 @@
-index.html<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบสำรวจความต้องการสนับสนุนเพิ่มเติมจากฝ่าย Admin Support</title>
-    <style>
-        body {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f1f3f4;
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        
-        .form-container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            overflow: hidden;
-        }
-        
-        .form-header {
-            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
-            color: white;
-            padding: 40px 24px;
-            text-align: center;
-        }
-        
-        .form-title {
-            font-size: 28px;
-            font-weight: 400;
-            margin: 0 0 16px 0;
-            line-height: 1.3;
-        }
-        
-        .form-description {
-            font-size: 14px;
-            opacity: 0.95;
-            margin: 0;
-            line-height: 1.5;
-        }
-        
-        .form-content {
-            padding: 24px;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-            padding-bottom: 32px;
-            border-bottom: 2px solid #e8eaed;
-        }
-        
-        .section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-        
-        .section-title {
-            font-size: 20px;
-            font-weight: 500;
-            color: #1a73e8;
-            margin: 0 0 8px 0;
-        }
-        
-        .section-description {
-            font-size: 14px;
-            color: #5f6368;
-            margin: 0 0 24px 0;
-            font-style: italic;
-        }
-        
-        .question-group {
-            margin-bottom: 32px;
-        }
-        
-        .question-title {
-            font-size: 16px;
-            font-weight: 400;
-            color: #202124;
-            margin: 0 0 8px 0;
-            line-height: 1.4;
-        }
-        
-        .required {
-            color: #d93025;
-        }
-        
-        .question-purpose {
-            font-size: 13px;
-            color: #5f6368;
-            margin: 0 0 16px 0;
-            padding: 12px;
-            background: #f8f9fa;
-            border-left: 4px solid #1a73e8;
-            border-radius: 0 4px 4px 0;
-        }
-        
-        .input-field {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #dadce0;
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.2s;
-        }
-        
-        .input-field:focus {
-            outline: none;
-            border-color: #1a73e8;
-            box-shadow: 0 0 0 1px #1a73e8;
-        }
-        
-        .textarea-field {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .radio-group, .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .radio-option, .checkbox-option {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            cursor: pointer;
-            padding: 12px;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-        
-        .radio-option:hover, .checkbox-option:hover {
-            background-color: #f8f9fa;
-        }
-        
-        .radio-option input, .checkbox-option input {
-            margin: 4px 0 0 0;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-        
-        .radio-option label, .checkbox-option label {
-            cursor: pointer;
-            font-size: 14px;
-            color: #202124;
-            line-height: 1.4;
-        }
-        
-        .other-input {
-            margin-top: 8px;
-            margin-left: 24px;
-            display: none;
-        }
-        
-        .validation-message {
-            color: #d93025;
-            font-size: 12px;
-            margin-top: 4px;
-            display: none;
-        }
-        
-        .submit-section {
-            padding: 24px;
-            background: #f8f9fa;
-            border-top: 1px solid #e8eaed;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .submit-btn {
-            background: #1a73e8;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .submit-btn:hover {
-            background: #1557b0;
-        }
-        
-        .clear-btn {
-            background: none;
-            color: #1a73e8;
-            border: none;
-            padding: 12px 16px;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .clear-btn:hover {
-            background: #f1f3f4;
-        }
-        
-        .success-message {
-            display: none;
-            background: #e8f5e8;
-            color: #137333;
-            padding: 20px;
-            border-radius: 4px;
-            margin-bottom: 16px;
-            text-align: center;
-            line-height: 1.5;
-        }
-        
-        .checkbox-counter {
-            font-size: 12px;
-            color: #5f6368;
-            margin-top: 8px;
-        }
-        
-        @media (max-width: 768px) {
-            .form-container {
-                margin: 0;
-                border-radius: 0;
-            }
-            
-            .form-title {
-                font-size: 24px;
-            }
-            
-            .submit-section {
-                flex-direction: column;
-                gap: 12px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document Management System : waneephan 🌹</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --rose: #e11d48;
+      --rose-dark: #be123c;
+      --ink: #172033;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --soft: #fff1f2;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Noto Sans Thai", "Segoe UI", Tahoma, sans-serif; background: #f8fafc; color: var(--ink); }
+    .glass { background: rgba(255,255,255,.92); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.6); box-shadow: 0 20px 50px rgba(15,23,42,.08); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: .9rem; padding: .7rem 1rem; font-weight: 700; transition: .18s ease; border: 1px solid transparent; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(15,23,42,.08); }
+    .btn-primary { background: linear-gradient(135deg,#e11d48,#fb7185); color: white; }
+    .btn-secondary { background: white; color: #be123c; border-color: #fecdd3; }
+    .btn-dark { background: #0f172a; color: white; }
+    .btn-danger { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+    .field { width: 100%; border: 1px solid var(--line); border-radius: .9rem; padding: .75rem .9rem; background: white; outline: none; transition: .15s ease; }
+    .field:focus { border-color: #fb7185; box-shadow: 0 0 0 4px rgba(251,113,133,.16); }
+    .label { display: block; font-size: .86rem; font-weight: 800; color: #475569; margin-bottom: .35rem; }
+    .badge { display:inline-flex; align-items:center; gap:.25rem; border-radius:999px; padding:.28rem .65rem; font-size:.76rem; font-weight:800; white-space:nowrap; }
+    .badge-in { background:#dcfce7; color:#166534; }
+    .badge-out { background:#dbeafe; color:#1d4ed8; }
+    .badge-status { background:#fff1f2; color:#be123c; border:1px solid #fecdd3; }
+    .badge-priority-normal { background:#dcfce7; color:#166534; }
+    .badge-priority-urgent { background:#fef9c3; color:#854d0e; }
+    .badge-priority-very { background:#ffedd5; color:#9a3412; }
+    .badge-priority-super { background:#fee2e2; color:#991b1b; }
+    .tab-active { color:#be123c; border-color:#e11d48; background:#fff1f2; }
+    .modal { position: fixed; inset: 0; background: rgba(15,23,42,.62); z-index: 50; display: none; align-items: center; justify-content: center; padding: 1rem; }
+    .modal.open { display: flex; }
+    .loading { position: fixed; inset: 0; z-index: 60; display:none; align-items:center; justify-content:center; background:rgba(255,255,255,.8); }
+    .loading.open { display:flex; }
+    @media print {
+      body * { visibility: hidden !important; }
+      #printArea, #printArea * { visibility: visible !important; }
+      #printArea { position: absolute; left: 0; top: 0; width: 100%; background: white; padding: 0; }
+      .no-print { display: none !important; }
+    }
+  </style>
 </head>
 <body>
-    <div class="form-container">
-        <div class="form-header">
-            <h1 class="form-title">แบบสำรวจความต้องการสนับสนุนเพิ่มเติมจากฝ่าย Admin Support</h1>
-            <p class="form-description">เพื่อพัฒนาการบริการเชิงรุก และสนับสนุนการทำงานของท่านให้ดียิ่งขึ้น หน่วยงาน Admin Support ขอรวบรวมความต้องการเพิ่มเติมจากบริการที่เรามีอยู่ในปัจจุบัน ความคิดเห็นของท่านจะถูกนำไปใช้ในการวางแผนปรับปรุงการบริการในไตรมาสถัดไป</p>
+  <div class="min-h-screen bg-[radial-gradient(circle_at_top_left,#ffe4e6,transparent_35%),linear-gradient(180deg,#fff,#f8fafc)]">
+    <header class="px-4 py-6 md:px-8">
+      <div class="mx-auto max-w-7xl glass rounded-3xl p-6 md:p-8">
+        <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p class="mb-2 inline-flex rounded-full bg-rose-100 px-3 py-1 text-sm font-bold text-rose-700">🌹 Document Management System</p>
+            <h1 class="text-3xl font-black tracking-tight text-slate-900 md:text-4xl">Document Management System : waneephan 🌹</h1>
+            <p class="mt-2 max-w-3xl text-slate-600">ระบบจัดการเอกสารเข้า-ออก เชื่อมต่อ Google Sheets ผ่าน Google Apps Script API พร้อม Dashboard, Export Excel, Print Preview, อัปโหลดไฟล์ และจัดการผู้ใช้งาน</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3 text-center md:min-w-[360px]">
+            <div class="rounded-2xl bg-white p-4 shadow-sm"><div id="kpiTotal" class="text-2xl font-black text-slate-900">0</div><div class="text-xs font-bold text-slate-500">เอกสารทั้งหมด</div></div>
+            <div class="rounded-2xl bg-white p-4 shadow-sm"><div id="kpiPending" class="text-2xl font-black text-rose-600">0</div><div class="text-xs font-bold text-slate-500">รอดำเนินการ</div></div>
+          </div>
         </div>
-        
-        <div class="form-content">
-            <div class="success-message" id="successMessage">
-                ✅ ขอขอบคุณสำหรับข้อเสนอแนะอันเป็นประโยชน์ ทีมงาน Admin Support จะนำข้อมูลของท่านไปพิจารณาเพื่อวางแผนและพัฒนาการบริการให้ดียิ่งขึ้นต่อไป
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-7xl px-4 pb-12 md:px-8">
+      <nav class="no-print mb-5 flex flex-wrap gap-2">
+        <button class="tab btn btn-secondary tab-active" data-tab="dashboard">📊 Dashboard</button>
+        <button class="tab btn btn-secondary" data-tab="form">📝 บันทึกเอกสาร</button>
+        <button class="tab btn btn-secondary" data-tab="table">📋 ตารางข้อมูล</button>
+        <button class="tab btn btn-secondary" data-tab="print">🖨️ พิมพ์รายงาน</button>
+        <button class="tab btn btn-secondary" data-tab="types">🏷️ จัดการประเภท</button>
+        <button class="tab btn btn-secondary" data-tab="users">👥 ผู้ใช้งาน</button>
+        <button class="tab btn btn-secondary" data-tab="settings">⚙️ ตั้งค่า API</button>
+      </nav>
+
+      <section id="dashboard" class="tab-panel space-y-5">
+        <div class="grid gap-4 md:grid-cols-4">
+          <div class="glass rounded-3xl p-5"><div class="text-sm font-bold text-slate-500">📥 เอกสารเข้า</div><div id="dashIn" class="mt-2 text-3xl font-black text-green-700">0</div></div>
+          <div class="glass rounded-3xl p-5"><div class="text-sm font-bold text-slate-500">📤 เอกสารออก</div><div id="dashOut" class="mt-2 text-3xl font-black text-blue-700">0</div></div>
+          <div class="glass rounded-3xl p-5"><div class="text-sm font-bold text-slate-500">✅ Complete</div><div id="dashComplete" class="mt-2 text-3xl font-black text-emerald-700">0</div></div>
+          <div class="glass rounded-3xl p-5"><div class="text-sm font-bold text-slate-500">🔴 ด่วนพิเศษ</div><div id="dashUrgent" class="mt-2 text-3xl font-black text-red-700">0</div></div>
+        </div>
+        <div class="glass rounded-3xl p-5">
+          <div class="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <h2 class="text-xl font-black">รายการล่าสุด</h2>
+            <div class="flex flex-wrap gap-2">
+              <button id="refreshBtn" class="btn btn-secondary">🔄 รีเฟรชจาก Google Sheets</button>
+              <button id="exportBtnTop" class="btn btn-primary">📊 Export Excel</button>
             </div>
-            
-            <form id="adminSupportForm">
-                <!-- Section 1: ข้อมูลเบื้องต้น -->
-                <div class="section">
-                    <h2 class="section-title">Section 1: ข้อมูลเบื้องต้น</h2>
-                    <p class="section-description">กรุณากรอกข้อมูลเพื่อประโยชน์ในการวิเคราะห์ข้อมูล</p>
-                    
-                    <div class="question-group">
-                        <h3 class="question-title">แผนก/ฝ่าย <span class="required">*</span></h3>
-                        <input type="text" class="input-field" name="department" required placeholder="กรุณาระบุแผนก/ฝ่ายของท่าน">
-                    </div>
-                </div>
-
-                <!-- Section 2: ความต้องการสนับสนุนเพิ่มเติม -->
-                <div class="section">
-                    <h2 class="section-title">Section 2: ความต้องการสนับสนุนเพิ่มเติม</h2>
-                    <p class="section-description">โปรดเลือกคำตอบที่ตรงกับความต้องการของท่านมากที่สุด</p>
-                    
-                    <div class="question-group">
-                        <h3 class="question-title">1. นอกเหนือจากการจองห้องประชุมตามปกติ หาก Admin Support มีบริการ "ช่วยเตรียมความพร้อมสำหรับการประชุม" ท่านต้องการให้เราสนับสนุนด้านใดเป็นพิเศษ? (เลือกได้สูงสุด 2 ข้อ) <span class="required">*</span></h3>
-                        <p class="question-purpose"><strong>วัตถุประสงค์:</strong> ต่อยอดจากการบริการ "จองห้องประชุม" ไปสู่บริการที่ครบวงจรมากขึ้น เพื่อลดภาระให้พนักงาน</p>
-                        
-                        <div class="checkbox-group" id="meetingSupport">
-                            <div class="checkbox-option">
-                                <input type="checkbox" id="meeting1" name="meetingSupport" value="การจัดเตรียมและทดสอบอุปกรณ์นำเสนอล่วงหน้า">
-                                <label for="meeting1">การจัดเตรียมและทดสอบอุปกรณ์นำเสนอล่วงหน้า (เช่น โปรเจคเตอร์, ระบบวิดีโอคอนเฟอเรนซ์)</label>
-                            </div>
-                            <div class="checkbox-option">
-                                <input type="checkbox" id="meeting2" name="meetingSupport" value="การจัดเตรียมเอกสารประกอบการประชุม">
-                                <label for="meeting2">การจัดเตรียมเอกสารประกอบการประชุม (เช่น พิมพ์และจัดชุดเอกสาร)</label>
-                            </div>
-                            <div class="checkbox-option">
-                                <input type="checkbox" id="meeting3" name="meetingSupport" value="การประสานงานจัดเตรียมเครื่องดื่ม/อาหารว่าง">
-                                <label for="meeting3">การประสานงานจัดเตรียมเครื่องดื่ม/อาหารว่างสำหรับการประชุม</label>
-                            </div>
-                            <div class="checkbox-option">
-                                <input type="checkbox" id="meeting4" name="meetingSupport" value="การจัดผังห้องประชุมให้เหมาะสม">
-                                <label for="meeting4">การจัดผังห้องประชุมให้เหมาะสมกับรูปแบบการประชุม (เช่น แบบ U-Shape, Classroom)</label>
-                            </div>
-                            <div class="checkbox-option">
-                                <input type="checkbox" id="meeting5" name="meetingSupport" value="อื่นๆ">
-                                <label for="meeting5">อื่นๆ (โปรดระบุ)</label>
-                            </div>
-                        </div>
-                        <div class="other-input" id="meetingOther">
-                            <input type="text" class="input-field" name="meetingSupportOther" placeholder="โปรดระบุ...">
-                        </div>
-                        <div class="checkbox-counter" id="meetingCounter">เลือกแล้ว: 0/2 ข้อ</div>
-                        <div class="validation-message" id="meetingValidation">กรุณาเลือกอย่างน้อย 1 ข้อ และไม่เกิน 2 ข้อ</div>
-                    </div>
-
-                    <div class="question-group">
-                        <h3 class="question-title">2. เพื่อให้การเบิกจ่ายพัสดุและอุปกรณ์สำนักงานมีประสิทธิภาพยิ่งขึ้น ท่านต้องการให้มีบริการหรือข้อมูลใดเพิ่มเติมมากที่สุด? <span class="required">*</span></h3>
-                        <p class="question-purpose"><strong>วัตถุประสงค์:</strong> หาแนวทางปรับปรุงกระบวนการเบิกจ่าย โดยเน้นการให้ข้อมูลเชิงรุกและลดขั้นตอนที่ซ้ำซ้อน</p>
-                        
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" id="supply1" name="supplyImprovement" value="ระบบออนไลน์สำหรับตรวจสอบสต็อกแบบ Real-time" required>
-                                <label for="supply1">ระบบออนไลน์สำหรับตรวจสอบสต็อกของกลางแบบ Real-time</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="supply2" name="supplyImprovement" value="รายการแนะนำอุปกรณ์มาตรฐานตามหลักสรีรศาสตร์">
-                                <label for="supply2">รายการแนะนำอุปกรณ์มาตรฐานตามหลักสรีรศาสตร์ (Ergonomics)</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="supply3" name="supplyImprovement" value="บริการให้คำปรึกษา/จัดหาอุปกรณ์เฉพาะทาง">
-                                <label for="supply3">บริการให้คำปรึกษา/จัดหาอุปกรณ์สำนักงานเฉพาะทางสำหรับโปรเจกต์พิเศษ</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="supply4" name="supplyImprovement" value="รอบการจัดส่งอุปกรณ์ไปยังโต๊ะทำงานโดยตรง">
-                                <label for="supply4">รอบการจัดส่งอุปกรณ์ไปยังโต๊ะทำงานโดยตรง เพื่อลดเวลาในการเดินมาเบิก</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="supply5" name="supplyImprovement" value="อื่นๆ">
-                                <label for="supply5">อื่นๆ (โปรดระบุ)</label>
-                            </div>
-                        </div>
-                        <div class="other-input" id="supplyOther">
-                            <input type="text" class="input-field" name="supplyImprovementOther" placeholder="โปรดระบุ...">
-                        </div>
-                    </div>
-
-                    <div class="question-group">
-                        <h3 class="question-title">3. ในด้านการประสานงานอาคารสถานที่ หากมีบริการ "ตรวจเช็คพื้นที่ทำงานเชิงรุก" ท่านอยากให้เราให้ความสำคัญกับเรื่องใดเป็นอันดับแรก? <span class="required">*</span></h3>
-                        <p class="question-purpose"><strong>วัตถุประสงค์:</strong> เปลี่ยนจากการรอ "แจ้งซ่อม" เป็นการเข้าไปดูแลและป้องกันปัญหาล่วงหน้า</p>
-                        
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" id="facility1" name="facilityPriority" value="การตรวจสอบและจัดระเบียบสายไฟ/ปลั๊กไฟเพื่อความปลอดภัย" required>
-                                <label for="facility1">การตรวจสอบและจัดระเบียบสายไฟ/ปลั๊กไฟเพื่อความปลอดภัย</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="facility2" name="facilityPriority" value="การตรวจสอบสภาพเฟอร์นิเจอร์และอุปกรณ์สำนักงาน">
-                                <label for="facility2">การตรวจสอบสภาพเฟอร์นิเจอร์และอุปกรณ์สำนักงาน (เช่น เก้าอี้, โต๊ะ) ให้อยู่ในสภาพพร้อมใช้งาน</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="facility3" name="facilityPriority" value="การตรวจสอบความสว่างและอุณหภูมิในพื้นที่ทำงาน">
-                                <label for="facility3">การตรวจสอบความสว่างและอุณหภูมิในพื้นที่ทำงานให้เหมาะสม</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="facility4" name="facilityPriority" value="การตรวจสอบและดูแลความสะอาดเรียบร้อยในพื้นที่ส่วนกลาง">
-                                <label for="facility4">การตรวจสอบและดูแลความสะอาดเรียบร้อยในพื้นที่ส่วนกลางเป็นพิเศษ</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="facility5" name="facilityPriority" value="อื่นๆ">
-                                <label for="facility5">อื่นๆ (โปรดระบุ)</label>
-                            </div>
-                        </div>
-                        <div class="other-input" id="facilityOther">
-                            <input type="text" class="input-field" name="facilityPriorityOther" placeholder="โปรดระบุ...">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Section 3: ข้อเสนอแนะเพื่อการพัฒนา -->
-                <div class="section">
-                    <h2 class="section-title">Section 3: ข้อเสนอแนะเพื่อการพัฒนา</h2>
-                    <p class="section-description">ความคิดเห็นของท่านมีค่าอย่างยิ่งต่อการพัฒนาบริการของเรา</p>
-                    
-                    <div class="question-group">
-                        <h3 class="question-title">4. จากบริการทั้งหมดของ Admin Support มีกระบวนการหรือขั้นตอนใดที่ท่านรู้สึกว่า "สามารถทำให้ง่ายขึ้น" หรือ "เป็นระบบดิจิทัล" ได้อีกบ้าง?</h3>
-                        <p class="question-purpose"><strong>วัตถุประสงค์:</strong> รวบรวมไอเดียในการปรับปรุงกระบวนการทำงานและนำเทคโนโลยีมาใช้</p>
-                        <textarea class="input-field textarea-field" name="processImprovement" placeholder="กรุณาแชร์ความคิดเห็นของท่าน..."></textarea>
-                    </div>
-
-                    <div class="question-group">
-                        <h3 class="question-title">5. หากท่านสามารถเสนอ "บริการใหม่" 1 อย่างที่อยากให้ Admin Support ทำให้ เพื่อช่วยให้การทำงานของท่านสะดวกสบายและมีประสิทธิภาพมากขึ้น บริการนั้นคืออะไร?</h3>
-                        <p class="question-purpose"><strong>วัตถุประสงค์:</strong> เปิดโอกาสให้พนักงานได้แสดงความคิดเห็นและความต้องการที่ยังไม่เคยถูกค้นพบ (Unmet Needs)</p>
-                        <textarea class="input-field textarea-field" name="newServiceIdea" placeholder="กรุณาแชร์ไอเดียบริการใหม่ของท่าน..."></textarea>
-                    </div>
-                </div>
-            </form>
+          </div>
+          <div id="recentTable" class="overflow-auto"></div>
         </div>
-        
-        <div class="submit-section">
-            <button type="button" class="clear-btn" onclick="clearForm()">ล้างแบบฟอร์ม</button>
-            <button type="submit" class="submit-btn" form="adminSupportForm">ส่งแบบสำรวจ</button>
+      </section>
+
+      <section id="form" class="tab-panel hidden">
+        <div id="typeChooser" class="glass rounded-3xl p-6 md:p-8">
+          <h2 class="mb-2 text-2xl font-black">เลือกประเภทเอกสารก่อนเริ่มบันทึก</h2>
+          <p class="mb-6 text-slate-600">เลขเอกสารจะรันอัตโนมัติและแยก Prefix ตามประเภท: IN / OUT</p>
+          <div class="grid gap-4 md:grid-cols-2">
+            <button class="doc-type-btn rounded-3xl border-2 border-green-200 bg-green-50 p-8 text-left hover:border-green-500" data-type="IN">
+              <div class="text-5xl">📥</div><div class="mt-3 text-2xl font-black text-green-800">เอกสารเข้า</div><p class="text-green-700">ผู้ส่งจากภายนอก → ผู้รับภายใน</p>
+            </button>
+            <button class="doc-type-btn rounded-3xl border-2 border-blue-200 bg-blue-50 p-8 text-left hover:border-blue-500" data-type="OUT">
+              <div class="text-5xl">📤</div><div class="mt-3 text-2xl font-black text-blue-800">เอกสารออก</div><p class="text-blue-700">ผู้ส่งภายใน → ผู้รับภายนอก</p>
+            </button>
+          </div>
         </div>
-    </div>
 
-    <script>
-        // จัดการ checkbox ที่เลือกได้สูงสุด 2 ข้อ
-        const meetingCheckboxes = document.querySelectorAll('input[name="meetingSupport"]');
-        const meetingCounter = document.getElementById('meetingCounter');
-        const meetingValidation = document.getElementById('meetingValidation');
-        const meetingOther = document.getElementById('meetingOther');
+        <form id="docForm" class="glass hidden rounded-3xl p-6 md:p-8">
+          <div class="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p id="selectedTypeBadge" class="badge badge-in mb-2">📥 เข้า</p>
+              <h2 class="text-2xl font-black">📝 แบบฟอร์มบันทึกเอกสาร</h2>
+            </div>
+            <button type="button" id="changeTypeBtn" class="btn btn-secondary">↩️ เปลี่ยนประเภท</button>
+          </div>
+          <div class="grid gap-4 md:grid-cols-3">
+            <div><label class="label">🔢 เลขที่เอกสาร (อัตโนมัติ)</label><input id="documentNo" name="documentNo" class="field bg-slate-50 font-bold" readonly /></div>
+            <div><label class="label">📅 วันที่และเวลา *</label><input id="documentDate" name="documentDate" type="datetime-local" class="field" required /></div>
+            <div><label class="label">🚦 ระดับความสำคัญ *</label><select id="priority" name="priority" class="field" required><option>🟢 ปกติ</option><option>🟡 ด่วน</option><option>🟠 ด่วนมาก</option><option>🔴 ด่วนพิเศษ</option></select></div>
+            <div><label id="senderLabel" class="label">👤 ผู้ส่ง (จากภายนอก) *</label><input id="sender" name="sender" class="field" required /></div>
+            <div><label class="label">🏢 แผนก *</label><input id="department" name="department" class="field" list="departmentList" required /></div>
+            <div><label class="label">🏭 บริษัท</label><input id="company" name="company" class="field" /></div>
+            <div><label class="label">☎️ เบอร์โทร</label><input id="phone" name="phone" class="field" type="tel" /></div>
+            <div><label class="label">📧 อีเมล</label><input id="email" name="email" class="field" type="email" /></div>
+            <div><label class="label">🏷️ ประเภทเอกสาร *</label><input id="docCategory" name="docCategory" class="field" list="categoryList" required /></div>
+            <div class="md:col-span-3"><label class="label">📌 ชื่อเรื่อง *</label><input id="subject" name="subject" class="field" required /></div>
+            <div><label id="recipient1Label" class="label">👥 ผู้รับ 1 (ภายใน) *</label><input id="recipient1" name="recipient1" class="field" required /></div>
+            <div><label id="recipient2Label" class="label">👥 ผู้รับ 2</label><input id="recipient2" name="recipient2" class="field" /></div>
+            <div><label class="label">📎 แนบไฟล์จริง</label><input id="attachments" name="attachments" class="field" type="file" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.png,.jpg,.jpeg,.gif,.zip,.rar,.txt" /></div>
+          </div>
 
-        meetingCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const checkedBoxes = document.querySelectorAll('input[name="meetingSupport"]:checked');
-                const count = checkedBoxes.length;
-                
-                meetingCounter.textContent = `เลือกแล้ว: ${count}/2 ข้อ`;
-                
-                if (count > 2) {
-                    this.checked = false;
-                    meetingValidation.style.display = 'block';
-                    meetingValidation.textContent = 'เลือกได้สูงสุด 2 ข้อเท่านั้น';
-                } else {
-                    meetingValidation.style.display = 'none';
-                }
+          <div class="mt-5">
+            <label class="label">☑️ สถานะ (เลือกได้หลายข้อ)</label>
+            <div id="statusOptions" class="grid gap-2 md:grid-cols-3"></div>
+            <div id="forwardDeptWrap" class="mt-3 hidden"><input id="forwardDepartment" class="field" placeholder="โปรดระบุแผนกที่ส่งต่อ" /></div>
+          </div>
+          <div class="mt-5"><label class="label">🗒️ หมายเหตุ</label><textarea id="notes" name="notes" rows="3" class="field"></textarea></div>
+          <div id="formError" class="mt-4 hidden rounded-2xl bg-red-50 p-4 font-bold text-red-700"></div>
+          <div class="mt-6 flex flex-wrap justify-end gap-2"><button type="button" id="resetFormBtn" class="btn btn-secondary">🧹 ล้างข้อมูล</button><button class="btn btn-primary" type="submit">💾 บันทึกข้อมูล</button></div>
+        </form>
+      </section>
 
-                // แสดง/ซ่อนช่องอื่นๆ
-                if (document.getElementById('meeting5').checked) {
-                    meetingOther.style.display = 'block';
-                } else {
-                    meetingOther.style.display = 'none';
-                }
-            });
-        });
+      <section id="table" class="tab-panel hidden space-y-4">
+        <div class="glass rounded-3xl p-5">
+          <div class="grid gap-3 md:grid-cols-5">
+            <input id="searchInput" class="field md:col-span-2" placeholder="🔍 ค้นหาเลขที่เอกสาร, ชื่อเรื่อง, ผู้ส่ง" />
+            <select id="statusFilter" class="field"><option value="">ทุกสถานะ</option></select>
+            <select id="typeFilter" class="field"><option value="">ทุกประเภท</option><option value="IN">📥 เข้า</option><option value="OUT">📤 ออก</option></select>
+            <button id="exportFilteredBtn" class="btn btn-primary">📊 Export Excel</button>
+          </div>
+        </div>
+        <div class="glass rounded-3xl p-5"><div id="dataTable" class="overflow-auto"></div></div>
+      </section>
 
-        // จัดการ radio button อื่นๆ สำหรับคำถามที่ 2
-        const supplyRadios = document.querySelectorAll('input[name="supplyImprovement"]');
-        const supplyOther = document.getElementById('supplyOther');
+      <section id="print" class="tab-panel hidden space-y-4">
+        <div class="glass no-print rounded-3xl p-5">
+          <h2 class="mb-4 text-xl font-black">🖨️ ตั้งค่ารายงานและ Print Preview</h2>
+          <div class="grid gap-4 md:grid-cols-4">
+            <div><label class="label">วันที่เริ่มต้น</label><input id="printStart" class="field" type="date" /></div>
+            <div><label class="label">วันที่สิ้นสุด</label><input id="printEnd" class="field" type="date" /></div>
+            <div><label class="label">Tag / ความสำคัญ</label><select id="printPriority" class="field"><option value="">ทั้งหมด</option><option>🔴 ด่วนพิเศษ</option><option>🟠 ด่วนมาก</option><option>🟡 ด่วน</option><option>🟢 ปกติ</option></select></div>
+            <div><label class="label">ประเภท</label><select id="printType" class="field"><option value="">ทั้งหมด</option><option value="IN">📥 เข้า</option><option value="OUT">📤 ออก</option></select></div>
+            <div><label class="label">สถานะ</label><select id="printStatus" class="field"><option value="">ทั้งหมด</option></select></div>
+            <div><label class="label">แผนก</label><select id="printDepartment" class="field"><option value="">ทุกแผนก</option></select></div>
+          </div>
+          <div class="mt-5">
+            <div class="mb-2 flex flex-wrap items-center gap-2"><span class="font-black">📋 เลือกคอลัมน์ที่ต้องการพิมพ์</span><button id="selectAllCols" type="button" class="btn btn-secondary !py-2">เลือกทั้งหมด</button><button id="clearAllCols" type="button" class="btn btn-secondary !py-2">ยกเลิกทั้งหมด</button></div>
+            <div id="printColumns" class="grid gap-2 md:grid-cols-4"></div>
+          </div>
+          <div class="mt-5 flex flex-wrap gap-2"><button id="previewBtn" class="btn btn-dark">👁️ แสดงตัวอย่าง</button><button id="printBtn" class="btn btn-primary">🖨️ Print out</button><button id="exportPrintBtn" class="btn btn-secondary">📊 Export เฉพาะรายงาน</button></div>
+        </div>
+        <div id="printArea" class="glass rounded-3xl p-5"></div>
+      </section>
 
-        supplyRadios.forEach(radio => {
-            radio.addEventListener('change', function() {
-                if (document.getElementById('supply5').checked) {
-                    supplyOther.style.display = 'block';
-                } else {
-                    supplyOther.style.display = 'none';
-                }
-            });
-        });
+      <section id="types" class="tab-panel hidden">
+        <div class="glass rounded-3xl p-5">
+          <h2 class="mb-4 text-xl font-black">🏷️ จัดการประเภทเอกสาร</h2>
+          <div class="flex gap-2"><input id="newCategory" class="field" placeholder="เพิ่มประเภทเอกสาร เช่น ใบแจ้งหนี้" /><button id="addCategoryBtn" class="btn btn-primary">เพิ่ม</button></div>
+          <div id="categoryManager" class="mt-4 grid gap-2 md:grid-cols-3"></div>
+        </div>
+      </section>
 
-        // จัดการ radio button อื่นๆ สำหรับคำถามที่ 3
-        const facilityRadios = document.querySelectorAll('input[name="facilityPriority"]');
-        const facilityOther = document.getElementById('facilityOther');
+      <section id="users" class="tab-panel hidden">
+        <div class="glass rounded-3xl p-5">
+          <h2 class="mb-4 text-xl font-black">👥 การจัดการผู้ใช้งาน (Admin)</h2>
+          <form id="userForm" class="grid gap-3 md:grid-cols-5"><input id="userName" class="field" placeholder="ชื่อผู้ใช้" required /><input id="userEmail" class="field" type="email" placeholder="อีเมล" required /><select id="userRole" class="field"><option>Admin</option><option>Officer</option><option>Viewer</option></select><input id="userDept" class="field" placeholder="แผนก" /><button class="btn btn-primary">เพิ่มผู้ใช้</button></form>
+          <div id="userTable" class="mt-5 overflow-auto"></div>
+        </div>
+      </section>
 
-        facilityRadios.forEach(radio => {
-            radio.addEventListener('change', function() {
-                if (document.getElementById('facility5').checked) {
-                    facilityOther.style.display = 'block';
-                } else {
-                    facilityOther.style.display = 'none';
-                }
-            });
-        });
+      <section id="settings" class="tab-panel hidden">
+        <div class="glass rounded-3xl p-5">
+          <h2 class="mb-3 text-xl font-black">⚙️ ตั้งค่า Google Apps Script API</h2>
+          <p class="mb-4 text-slate-600">ใส่ Web App URL ของ Google Apps Script เพื่อบันทึก/ดึงข้อมูลจริงจาก Google Sheets และ Export ไปยัง Sheet ชื่อ “Document Management System Rose” หากไม่ตั้งค่า ระบบจะเก็บข้อมูลในเบราว์เซอร์เป็นหลัก</p>
+          <label class="label">Google Apps Script Web App URL</label><input id="apiUrl" class="field" placeholder="https://script.google.com/macros/s/.../exec" />
+          <div class="mt-4 flex flex-wrap gap-2"><button id="saveSettingsBtn" class="btn btn-primary">บันทึกการตั้งค่า</button><button id="testApiBtn" class="btn btn-secondary">ทดสอบ API</button><button id="downloadGuideBtn" class="btn btn-secondary">📘 คำแนะนำ Export</button></div>
+          <pre id="settingsHelp" class="mt-4 overflow-auto rounded-2xl bg-slate-900 p-4 text-sm text-slate-100"></pre>
+        </div>
+      </section>
+    </main>
+  </div>
 
-        // จัดการการส่งฟอร์ม
-        document.getElementById('adminSupportForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // ตรวจสอบ checkbox ที่เลือกได้สูงสุด 2 ข้อ
-            const checkedMeeting = document.querySelectorAll('input[name="meetingSupport"]:checked');
-            if (checkedMeeting.length === 0 || checkedMeeting.length > 2) {
-                meetingValidation.style.display = 'block';
-                meetingValidation.textContent = 'กรุณาเลือกอย่างน้อย 1 ข้อ และไม่เกิน 2 ข้อ';
-                document.getElementById('meetingSupport').scrollIntoView({ behavior: 'smooth' });
-                return;
-            }
+  <div id="editModal" class="modal"><div class="max-h-[92vh] w-full max-w-4xl overflow-auto rounded-3xl bg-white p-6"><div class="mb-4 flex items-center justify-between"><h2 class="text-xl font-black">✏️ แก้ไขเอกสาร</h2><button id="closeEditBtn" class="btn btn-secondary">ปิด</button></div><div id="editContent"></div></div></div>
+  <div id="loading" class="loading"><div class="w-full max-w-sm rounded-3xl bg-white p-6 text-center shadow-2xl"><div class="mb-3 text-4xl">🌹</div><div id="loadingText" class="font-black text-rose-700">กำลังบันทึกข้อมูล...</div><div class="mt-4 h-3 overflow-hidden rounded-full bg-rose-100"><div id="progressBar" class="h-full w-0 rounded-full bg-rose-600 transition-all"></div></div></div></div>
+  <div id="toast" class="fixed right-4 top-4 z-[70] hidden max-w-md rounded-2xl p-4 font-bold shadow-2xl"></div>
 
-            // เก็บข้อมูลจากฟอร์ม
-            const formData = new FormData(this);
-            const data = {};
-            
-            data.department = formData.get('department');
-            data.meetingSupport = formData.getAll('meetingSupport');
-            data.meetingSupportOther = formData.get('meetingSupportOther');
-            data.supplyImprovement = formData.get('supplyImprovement');
-            data.supplyImprovementOther = formData.get('supplyImprovementOther');
-            data.facilityPriority = formData.get('facilityPriority');
-            data.facilityPriorityOther = formData.get('facilityPriorityOther');
-            data.processImprovement = formData.get('processImprovement');
-            data.newServiceIdea = formData.get('newServiceIdea');
-            
-            // แสดงข้อความสำเร็จ
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // เลื่อนไปที่ข้อความสำเร็จ
-            document.getElementById('successMessage').scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center' 
-            });
-            
-            // ล้างฟอร์ม
-            setTimeout(() => {
-                this.reset();
-                meetingCounter.textContent = 'เลือกแล้ว: 0/2 ข้อ';
-                meetingOther.style.display = 'none';
-                supplyOther.style.display = 'none';
-                facilityOther.style.display = 'none';
-            }, 1000);
-            
-            // ซ่อนข้อความสำเร็จหลัง 8 วินาที
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 8000);
-            
-            console.log('ข้อมูลแบบสำรวจ Admin Support:', data);
-        });
-        
-        function clearForm() {
-            if (confirm('คุณต้องการล้างข้อมูลทั้งหมดใช่หรือไม่?')) {
-                document.getElementById('adminSupportForm').reset();
-                document.getElementById('successMessage').style.display = 'none';
-                meetingCounter.textContent = 'เลือกแล้ว: 0/2 ข้อ';
-                meetingValidation.style.display = 'none';
-                meetingOther.style.display = 'none';
-                supplyOther.style.display = 'none';
-                facilityOther.style.display = 'none';
-            }
+  <datalist id="categoryList"></datalist>
+  <datalist id="departmentList"></datalist>
+
+  <script>
+    const STORAGE_KEYS = { docs: 'dms_waneephan_docs', categories: 'dms_waneephan_categories', users: 'dms_waneephan_users', settings: 'dms_waneephan_settings' };
+    const statuses = ['รอดำเนินการ','เสนออนุมัติ','อนุมัติ','ไม่อนุมัติ','ต้องแก้ไข','ขอข้อมูลเพิ่มเติม','ส่งต่อไปให้แผนก (โปรดระบุ)','ส่งคืนต้นเรื่อง','Complete'];
+    const defaultCategories = ['จดหมาย','สัญญา','ใบแจ้งหนี้','ใบเสนอราคา','รายงาน','คำร้อง','ประกาศ'];
+    const defaultUsers = [
+      { id: uid(), name: 'วณีพันธ์ โรส', email: 'waneephan@example.com', role: 'Admin', department: 'Admin Support' },
+      { id: uid(), name: 'สมชาย เอกสารดี', email: 'somchai@example.com', role: 'Officer', department: 'ธุรการ' }
+    ];
+    const columns = [
+      ['documentNo','เลขที่เอกสาร'], ['docTypeLabel','ประเภท'], ['documentDate','วันที่'], ['sender','ผู้ส่ง'], ['department','แผนก'], ['company','บริษัท'], ['phone','เบอร์โทร'], ['email','อีเมล'], ['docCategory','ประเภทเอกสาร'], ['subject','ชื่อเรื่อง'], ['recipient1','ผู้รับ 1'], ['recipient2','ผู้รับ 2'], ['priority','Tag'], ['statusText','สถานะ'], ['notes','หมายเหตุ'], ['fileText','ไฟล์แนบ']
+    ];
+    let docs = load(STORAGE_KEYS.docs, []);
+    let categories = load(STORAGE_KEYS.categories, defaultCategories);
+    let users = load(STORAGE_KEYS.users, defaultUsers);
+    let settings = load(STORAGE_KEYS.settings, { apiUrl: '' });
+    let selectedType = '';
+    let editingId = null;
+
+    function uid() { return (globalThis.crypto?.randomUUID?.() || `id-${Date.now()}-${Math.random().toString(16).slice(2)}`); }
+    function load(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } }
+    function save(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+    function todayLocalDateTime() { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0,16); }
+    function escapeHtml(value='') { return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+    function typeLabel(type) { return type === 'OUT' ? '📤 ออก' : '📥 เข้า'; }
+    function typeBadge(type) { return `<span class="badge ${type === 'OUT' ? 'badge-out' : 'badge-in'}">${typeLabel(type)}</span>`; }
+    function priorityClass(priority='') { if (priority.includes('ด่วนพิเศษ')) return 'badge-priority-super'; if (priority.includes('ด่วนมาก')) return 'badge-priority-very'; if (priority.includes('ด่วน')) return 'badge-priority-urgent'; return 'badge-priority-normal'; }
+    function statusBadges(doc) { return (doc.statuses || []).map(s => `<span class="badge badge-status">${escapeHtml(s === 'ส่งต่อไปให้แผนก (โปรดระบุ)' && doc.forwardDepartment ? `${s}: ${doc.forwardDepartment}` : s)}</span>`).join(' '); }
+    function docDisplay(doc) { return { ...doc, docTypeLabel: typeLabel(doc.type), statusText: (doc.statuses || []).join(', '), fileText: (doc.files || []).map(f => f.url ? `${f.name} (${f.url})` : f.name).join(', ') }; }
+    function showToast(message, ok=true) { const t = document.getElementById('toast'); t.className = `fixed right-4 top-4 z-[70] max-w-md rounded-2xl p-4 font-bold shadow-2xl ${ok ? 'bg-emerald-50 text-emerald-800' : 'bg-red-50 text-red-800'}`; t.textContent = message; t.classList.remove('hidden'); setTimeout(() => t.classList.add('hidden'), 3600); }
+    function setLoading(open, text='กำลังบันทึกข้อมูล...') { document.getElementById('loading').classList.toggle('open', open); document.getElementById('loadingText').textContent = text; document.getElementById('progressBar').style.width = open ? '18%' : '0'; }
+    function bumpProgress(pct) { document.getElementById('progressBar').style.width = pct + '%'; }
+
+    function nextDocumentNo(type) {
+      const prefix = type === 'OUT' ? 'OUT' : 'IN';
+      const year = new Date().getFullYear();
+      const max = docs.filter(d => d.type === type && d.documentNo?.startsWith(`${prefix}-${year}-`)).reduce((m,d) => Math.max(m, Number(d.documentNo.split('-').pop()) || 0), 0);
+      return `${prefix}-${year}-${String(max + 1).padStart(5,'0')}`;
+    }
+
+    function init() {
+      document.getElementById('documentDate').value = todayLocalDateTime();
+      document.getElementById('apiUrl').value = settings.apiUrl || '';
+      buildStatusOptions('statusOptions');
+      buildFilters(); buildPrintColumns(); refreshCategoryUi(); renderAll(); showDownloadGuide(false);
+      document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+      document.querySelectorAll('.doc-type-btn').forEach(btn => btn.addEventListener('click', () => chooseType(btn.dataset.type)));
+      document.getElementById('changeTypeBtn').addEventListener('click', changeType);
+      document.getElementById('docForm').addEventListener('submit', submitDocument);
+      document.getElementById('resetFormBtn').addEventListener('click', resetDocumentForm);
+      ['searchInput','statusFilter','typeFilter'].forEach(id => document.getElementById(id).addEventListener('input', renderTables));
+      ['printStart','printEnd','printPriority','printType','printStatus','printDepartment'].forEach(id => document.getElementById(id).addEventListener('input', renderPrintPreview));
+      document.getElementById('previewBtn').addEventListener('click', renderPrintPreview);
+      document.getElementById('printBtn').addEventListener('click', () => { renderPrintPreview(); window.print(); });
+      document.getElementById('exportBtnTop').addEventListener('click', () => exportExcel(docs, 'เอกสาร waneephan'));
+      document.getElementById('exportFilteredBtn').addEventListener('click', () => exportExcel(filteredDocs(), 'เอกสาร waneephan'));
+      document.getElementById('exportPrintBtn').addEventListener('click', () => exportExcel(printFilteredDocs(), 'เอกสาร waneephan', selectedPrintColumns()));
+      document.getElementById('refreshBtn').addEventListener('click', fetchFromApi);
+      document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
+      document.getElementById('testApiBtn').addEventListener('click', testApi);
+      document.getElementById('downloadGuideBtn').addEventListener('click', () => showDownloadGuide(true));
+      document.getElementById('addCategoryBtn').addEventListener('click', addCategory);
+      document.getElementById('userForm').addEventListener('submit', addUser);
+      document.getElementById('closeEditBtn').addEventListener('click', () => document.getElementById('editModal').classList.remove('open'));
+      document.getElementById('forwardDepartment').addEventListener('input', () => {});
+    }
+
+    function switchTab(tab) { document.querySelectorAll('.tab').forEach(b => b.classList.toggle('tab-active', b.dataset.tab === tab)); document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('hidden', p.id !== tab)); if (tab === 'print') renderPrintPreview(); }
+    function chooseType(type) { selectedType = type; document.getElementById('typeChooser').classList.add('hidden'); document.getElementById('docForm').classList.remove('hidden'); applyTypeLabels(); document.getElementById('documentNo').value = nextDocumentNo(type); }
+    function changeType() { selectedType = ''; document.getElementById('docForm').classList.add('hidden'); document.getElementById('typeChooser').classList.remove('hidden'); }
+    function applyTypeLabels() {
+      const out = selectedType === 'OUT';
+      document.getElementById('selectedTypeBadge').className = `badge ${out ? 'badge-out' : 'badge-in'} mb-2`;
+      document.getElementById('selectedTypeBadge').textContent = typeLabel(selectedType);
+      document.getElementById('senderLabel').textContent = out ? '👤 ผู้ส่ง (ภายใน) *' : '👤 ผู้ส่ง (จากภายนอก) *';
+      document.getElementById('recipient1Label').textContent = out ? '👥 ผู้รับ 1 (ภายนอก) *' : '👥 ผู้รับ 1 (ภายใน) *';
+      document.getElementById('recipient2Label').textContent = out ? '👥 ผู้รับ 2 (ภายนอก)' : '👥 ผู้รับ 2';
+    }
+
+    function buildStatusOptions(containerId, selected=[]) {
+      const wrap = document.getElementById(containerId);
+      wrap.innerHTML = statuses.map((s, i) => `<label class="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white p-3 text-sm font-bold"><input type="checkbox" value="${escapeHtml(s)}" ${selected.includes(s) ? 'checked' : ''}> ${escapeHtml(s)}</label>`).join('');
+      wrap.querySelectorAll('input').forEach(cb => cb.addEventListener('change', () => {
+        const checked = [...wrap.querySelectorAll('input:checked')].map(i => i.value);
+        document.getElementById('forwardDeptWrap')?.classList.toggle('hidden', !checked.includes('ส่งต่อไปให้แผนก (โปรดระบุ)'));
+      }));
+    }
+
+    async function fileToPayload(file) {
+      const dataUrl = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file); });
+      return { name: file.name, type: file.type || 'application/octet-stream', size: file.size, data: String(dataUrl).split(',')[1], url: '' };
+    }
+
+    async function submitDocument(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const error = document.getElementById('formError');
+      error.classList.add('hidden');
+      if (!selectedType) return showToast('กรุณาเลือกประเภทเอกสารก่อน', false);
+      if (!form.reportValidity()) return;
+      const selectedStatuses = [...document.querySelectorAll('#statusOptions input:checked')].map(i => i.value);
+      if (!selectedStatuses.length) { error.textContent = 'กรุณาเลือกสถานะอย่างน้อย 1 รายการ'; error.classList.remove('hidden'); return; }
+      if (selectedStatuses.includes('ส่งต่อไปให้แผนก (โปรดระบุ)') && !document.getElementById('forwardDepartment').value.trim()) { error.textContent = 'กรุณาระบุแผนกที่ต้องการส่งต่อ'; error.classList.remove('hidden'); return; }
+      const documentNo = document.getElementById('documentNo').value;
+      if (docs.some(d => d.documentNo === documentNo)) { error.textContent = 'เลขที่เอกสารซ้ำ กรุณากดเปลี่ยนประเภทหรือรีเฟรชเลขใหม่'; error.classList.remove('hidden'); return; }
+      setLoading(true); bumpProgress(30);
+      try {
+        const files = [];
+        for (const file of document.getElementById('attachments').files) files.push(await fileToPayload(file));
+        bumpProgress(55);
+        const doc = { id: uid(), type: selectedType, documentNo, documentDate: document.getElementById('documentDate').value, sender: document.getElementById('sender').value.trim(), department: document.getElementById('department').value.trim(), company: document.getElementById('company').value.trim(), phone: document.getElementById('phone').value.trim(), email: document.getElementById('email').value.trim(), docCategory: document.getElementById('docCategory').value.trim(), subject: document.getElementById('subject').value.trim(), recipient1: document.getElementById('recipient1').value.trim(), recipient2: document.getElementById('recipient2').value.trim(), priority: document.getElementById('priority').value, statuses: selectedStatuses, forwardDepartment: document.getElementById('forwardDepartment').value.trim(), notes: document.getElementById('notes').value.trim(), files, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
+        try {
+          const apiResult = await sendToApi({ action: 'create', doc });
+          if (apiResult?.fileUrls) doc.files = doc.files.map((f, i) => ({ ...f, url: apiResult.fileUrls[i] || f.url }));
+        } catch (apiError) {
+          showToast('บันทึกในเครื่องสำเร็จ แต่ส่งไป Google Sheets ไม่สำเร็จ: ' + apiError.message, false);
         }
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984aec7cd039a9f9',t:'MTc1ODgwNzUyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+        docs.unshift(doc); save(STORAGE_KEYS.docs, docs); bumpProgress(100);
+        if (!settings.apiUrl) showToast('บันทึกข้อมูลในเครื่องสำเร็จ');
+        else showToast('บันทึกข้อมูลสำเร็จ');
+        resetDocumentForm(); renderAll(); switchTab('dashboard');
+      } catch (err) { showToast('เกิดข้อผิดพลาดในการอ่านไฟล์หรือบันทึกข้อมูล: ' + err.message, false); }
+      finally { setTimeout(() => setLoading(false), 450); }
+    }
+
+    function resetDocumentForm() { document.getElementById('docForm').reset(); document.getElementById('documentDate').value = todayLocalDateTime(); document.getElementById('forwardDeptWrap').classList.add('hidden'); document.querySelectorAll('#statusOptions input').forEach(i => i.checked = false); if (selectedType) document.getElementById('documentNo').value = nextDocumentNo(selectedType); }
+
+    function filteredDocs() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim(); const st = document.getElementById('statusFilter').value; const ty = document.getElementById('typeFilter').value;
+      return docs.filter(d => (!q || [d.documentNo,d.subject,d.sender].some(v => String(v || '').toLowerCase().includes(q))) && (!st || d.statuses?.includes(st)) && (!ty || d.type === ty));
+    }
+
+    function renderAll() { buildFilters(); refreshCategoryUi(); renderDashboard(); renderTables(); renderUsers(); renderPrintPreview(); }
+    function renderDashboard() {
+      document.getElementById('kpiTotal').textContent = docs.length; document.getElementById('kpiPending').textContent = docs.filter(d => d.statuses?.includes('รอดำเนินการ')).length;
+      document.getElementById('dashIn').textContent = docs.filter(d => d.type === 'IN').length; document.getElementById('dashOut').textContent = docs.filter(d => d.type === 'OUT').length; document.getElementById('dashComplete').textContent = docs.filter(d => d.statuses?.includes('Complete')).length; document.getElementById('dashUrgent').textContent = docs.filter(d => d.priority?.includes('ด่วนพิเศษ')).length;
+      document.getElementById('recentTable').innerHTML = tableHtml(docs.slice(0,5), false);
+    }
+    function renderTables() { document.getElementById('dataTable').innerHTML = tableHtml(filteredDocs(), true); }
+    function tableHtml(rows, actions) {
+      if (!rows.length) return '<div class="rounded-2xl bg-slate-50 p-8 text-center font-bold text-slate-500">ยังไม่มีข้อมูลเอกสาร</div>';
+      return `<table class="min-w-full border-separate border-spacing-y-2 text-sm"><thead><tr class="text-left text-slate-500"><th class="p-3">ประเภท</th><th class="p-3">เลขที่</th><th class="p-3">วันที่</th><th class="p-3">ผู้ส่ง</th><th class="p-3">ชื่อเรื่อง</th><th class="p-3">สถานะ</th><th class="p-3">Tag</th><th class="p-3">ไฟล์</th>${actions ? '<th class="p-3">จัดการ</th>' : ''}</tr></thead><tbody>${rows.map(d => `<tr class="bg-white shadow-sm"><td class="rounded-l-2xl p-3">${typeBadge(d.type)}</td><td class="p-3 font-black">${escapeHtml(d.documentNo)}</td><td class="p-3">${formatDate(d.documentDate)}</td><td class="p-3">${escapeHtml(d.sender)}</td><td class="p-3 min-w-[220px]">${escapeHtml(d.subject)}</td><td class="p-3 min-w-[220px]">${statusBadges(d)}</td><td class="p-3"><span class="badge ${priorityClass(d.priority)}">${escapeHtml(d.priority)}</span></td><td class="p-3">${fileLinks(d)}</td>${actions ? `<td class="rounded-r-2xl p-3"><div class="flex gap-2"><button class="btn btn-secondary !py-2" onclick="openEdit('${d.id}')">แก้ไข</button><button class="btn btn-danger !py-2" onclick="deleteDoc('${d.id}')">ลบ</button></div></td>` : ''}</tr>`).join('')}</tbody></table>`;
+    }
+    function fileLinks(d) { return (d.files || []).length ? (d.files || []).map(f => f.url ? `<a class="font-bold text-rose-700 underline" target="_blank" href="${escapeHtml(f.url)}">${escapeHtml(f.name)}</a>` : `<span>${escapeHtml(f.name)}</span>`).join('<br>') : '-'; }
+    function formatDate(value) { if (!value) return ''; const d = new Date(value); return Number.isNaN(d.getTime()) ? value : d.toLocaleString('th-TH', { dateStyle:'medium', timeStyle:'short' }); }
+
+    function openEdit(id) {
+      const doc = docs.find(d => d.id === id); if (!doc) return; editingId = id;
+      document.getElementById('editContent').innerHTML = `<form id="editForm" class="grid gap-4 md:grid-cols-3">
+        <div><label class="label">เลขที่เอกสาร (แก้ไขไม่ได้)</label><input class="field bg-slate-50 font-black" name="documentNo" value="${escapeHtml(doc.documentNo)}" readonly></div>
+        <div><label class="label">วันที่</label><input class="field" type="datetime-local" name="documentDate" value="${escapeHtml(doc.documentDate)}" required></div>
+        <div><label class="label">ความสำคัญ</label><select class="field" name="priority">${['🟢 ปกติ','🟡 ด่วน','🟠 ด่วนมาก','🔴 ด่วนพิเศษ'].map(p => `<option ${doc.priority===p?'selected':''}>${p}</option>`).join('')}</select></div>
+        ${['sender','department','company','phone','email','docCategory','subject','recipient1','recipient2'].map(k => `<div class="${k==='subject'?'md:col-span-3':''}"><label class="label">${fieldName(k)}</label><input class="field" name="${k}" value="${escapeHtml(doc[k])}" ${['sender','department','docCategory','subject','recipient1'].includes(k)?'required':''}></div>`).join('')}
+        <div class="md:col-span-3"><label class="label">สถานะ</label><div id="editStatusOptions" class="grid gap-2 md:grid-cols-3"></div><input id="editForwardDepartment" class="field mt-3" placeholder="แผนกที่ส่งต่อ" value="${escapeHtml(doc.forwardDepartment)}"></div>
+        <div class="md:col-span-3"><label class="label">หมายเหตุ</label><textarea class="field" name="notes" rows="3">${escapeHtml(doc.notes)}</textarea></div>
+        <div class="md:col-span-3 flex justify-end gap-2"><button type="button" class="btn btn-secondary" onclick="document.getElementById('editModal').classList.remove('open')">ยกเลิก</button><button class="btn btn-primary">บันทึกการแก้ไข</button></div>
+      </form>`;
+      buildStatusOptions('editStatusOptions', doc.statuses || []);
+      document.getElementById('editForm').addEventListener('submit', saveEdit);
+      document.getElementById('editModal').classList.add('open');
+    }
+    function fieldName(k) { return ({sender:'ผู้ส่ง',department:'แผนก',company:'บริษัท',phone:'เบอร์โทร',email:'อีเมล',docCategory:'ประเภทเอกสาร',subject:'ชื่อเรื่อง',recipient1:'ผู้รับ 1',recipient2:'ผู้รับ 2'})[k] || k; }
+    async function saveEdit(e) { e.preventDefault(); const doc = docs.find(d => d.id === editingId); if (!doc) return; const fd = new FormData(e.currentTarget); ['documentDate','sender','department','company','phone','email','docCategory','subject','recipient1','recipient2','priority','notes'].forEach(k => doc[k] = fd.get(k)); doc.statuses = [...document.querySelectorAll('#editStatusOptions input:checked')].map(i => i.value); doc.forwardDepartment = document.getElementById('editForwardDepartment').value.trim(); doc.updatedAt = new Date().toISOString(); save(STORAGE_KEYS.docs, docs); await sendToApi({ action:'update', doc }).catch(()=>null); document.getElementById('editModal').classList.remove('open'); renderAll(); showToast('แก้ไขข้อมูลสำเร็จ'); }
+    async function deleteDoc(id) { if (!confirm('ยืนยันการลบเอกสารนี้?')) return; const doc = docs.find(d => d.id === id); docs = docs.filter(d => d.id !== id); save(STORAGE_KEYS.docs, docs); await sendToApi({ action:'delete', id, documentNo: doc?.documentNo }).catch(()=>null); renderAll(); showToast('ลบเอกสารแล้ว'); }
+
+    function buildFilters() {
+      ['statusFilter','printStatus'].forEach(id => { const current = document.getElementById(id).value || ''; document.getElementById(id).innerHTML = `<option value="">${id==='statusFilter'?'ทุกสถานะ':'ทั้งหมด'}</option>` + statuses.map(s => `<option ${current===s?'selected':''}>${s}</option>`).join(''); });
+      const depts = [...new Set(docs.map(d => d.department).filter(Boolean))].sort(); document.getElementById('printDepartment').innerHTML = '<option value="">ทุกแผนก</option>' + depts.map(d => `<option>${escapeHtml(d)}</option>`).join(''); document.getElementById('departmentList').innerHTML = depts.map(d => `<option value="${escapeHtml(d)}"></option>`).join('');
+    }
+    function refreshCategoryUi() { document.getElementById('categoryList').innerHTML = categories.map(c => `<option value="${escapeHtml(c)}"></option>`).join(''); document.getElementById('categoryManager').innerHTML = categories.map((c, index) => `<div class="flex items-center justify-between rounded-2xl border bg-white p-3"><input class="field !py-2" value="${escapeHtml(c)}" onchange="renameCategoryByIndex(${index}, this.value)"><button class="btn btn-danger !py-2" onclick="removeCategoryByIndex(${index})">ลบ</button></div>`).join(''); }
+    function addCategory() { const v = document.getElementById('newCategory').value.trim(); if (!v) return; if (!categories.includes(v)) categories.push(v); save(STORAGE_KEYS.categories, categories); document.getElementById('newCategory').value=''; refreshCategoryUi(); }
+    function renameCategoryByIndex(index, newName) { categories[index] = newName.trim(); categories = categories.filter(Boolean); save(STORAGE_KEYS.categories, categories); refreshCategoryUi(); }
+    function removeCategoryByIndex(index) { categories.splice(index, 1); save(STORAGE_KEYS.categories, categories); refreshCategoryUi(); }
+
+    function renderUsers() { document.getElementById('userTable').innerHTML = `<table class="min-w-full text-sm"><thead><tr class="text-left text-slate-500"><th class="p-3">ชื่อ</th><th class="p-3">อีเมล</th><th class="p-3">บทบาท</th><th class="p-3">แผนก</th><th class="p-3">จัดการ</th></tr></thead><tbody>${users.map(u => `<tr class="border-t"><td class="p-3"><input class="field !py-2" value="${escapeHtml(u.name)}" onchange="updateUser('${u.id}','name',this.value)"></td><td class="p-3"><input class="field !py-2" value="${escapeHtml(u.email)}" onchange="updateUser('${u.id}','email',this.value)"></td><td class="p-3"><select class="field !py-2" onchange="updateUser('${u.id}','role',this.value)">${['Admin','Officer','Viewer'].map(r => `<option ${u.role===r?'selected':''}>${r}</option>`).join('')}</select></td><td class="p-3"><input class="field !py-2" value="${escapeHtml(u.department)}" onchange="updateUser('${u.id}','department',this.value)"></td><td class="p-3"><button class="btn btn-danger !py-2" onclick="deleteUser('${u.id}')">ลบ</button></td></tr>`).join('')}</tbody></table>`; }
+    function addUser(e) { e.preventDefault(); users.push({ id: uid(), name: userName.value.trim(), email: userEmail.value.trim(), role: userRole.value, department: userDept.value.trim() }); save(STORAGE_KEYS.users, users); e.target.reset(); renderUsers(); }
+    function updateUser(id, key, value) { const u = users.find(x => x.id === id); if (u) { u[key] = value; save(STORAGE_KEYS.users, users); } }
+    function deleteUser(id) { users = users.filter(u => u.id !== id); save(STORAGE_KEYS.users, users); renderUsers(); }
+
+    function buildPrintColumns() { document.getElementById('printColumns').innerHTML = columns.map(([key,label]) => `<label class="flex items-center gap-2 rounded-2xl border bg-white p-3 text-sm font-bold"><input type="checkbox" value="${key}" checked> ${label}</label>`).join(''); document.getElementById('printColumns').addEventListener('change', renderPrintPreview); document.getElementById('selectAllCols').addEventListener('click', () => { document.querySelectorAll('#printColumns input').forEach(i => i.checked = true); renderPrintPreview(); }); document.getElementById('clearAllCols').addEventListener('click', () => { document.querySelectorAll('#printColumns input').forEach(i => i.checked = false); renderPrintPreview(); }); }
+    function selectedPrintColumns() { const selected = [...document.querySelectorAll('#printColumns input:checked')].map(i => i.value); return columns.filter(([k]) => selected.includes(k)); }
+    function printFilteredDocs() { const start = printStart.value; const end = printEnd.value; return docs.filter(d => (!start || d.documentDate?.slice(0,10) >= start) && (!end || d.documentDate?.slice(0,10) <= end) && (!printPriority.value || d.priority === printPriority.value) && (!printType.value || d.type === printType.value) && (!printStatus.value || d.statuses?.includes(printStatus.value)) && (!printDepartment.value || d.department === printDepartment.value)); }
+    function renderPrintPreview() { const rows = printFilteredDocs().map(docDisplay); const cols = selectedPrintColumns(); document.getElementById('printArea').innerHTML = `<div class="mb-4 text-center"><h2 class="text-2xl font-black">รายงานเอกสาร waneephan 🌹</h2><p class="text-sm text-slate-500">พิมพ์เมื่อ ${new Date().toLocaleString('th-TH')} | จำนวน ${rows.length} รายการ</p></div>${rows.length && cols.length ? `<table class="w-full border-collapse text-xs"><thead><tr>${cols.map(([,l]) => `<th class="border bg-slate-100 p-2 text-left">${l}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map(([k]) => `<td class="border p-2 align-top">${escapeHtml(r[k] || '')}</td>`).join('')}</tr>`).join('')}</tbody></table>` : '<div class="p-8 text-center text-slate-500">ไม่มีข้อมูลหรือไม่ได้เลือกคอลัมน์</div>'}`; }
+
+    function exportExcel(rows, sheetName='เอกสาร waneephan', cols=columns) {
+      const data = rows.map(docDisplay); const safeSheetName = escapeHtml(sheetName); const html = `\ufeff<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="UTF-8"><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>${safeSheetName}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><style>table{border-collapse:collapse}th{background:#e5e7eb;font-weight:bold}td,th{border:1px solid #999;padding:6px;mso-number-format:'\\@';}</style></head><body><table><thead><tr>${cols.map(([,l]) => `<th>${escapeHtml(l)}</th>`).join('')}</tr></thead><tbody>${data.map(r => `<tr>${cols.map(([k]) => `<td>${escapeHtml(r[k] || '')}</td>`).join('')}</tr>`).join('')}</tbody></table></body></html>`;
+      downloadFile(html, `เอกสาร-waneephan-${new Date().toISOString().slice(0,10)}.xls`, 'application/vnd.ms-excel;charset=utf-8');
+    }
+    function downloadFile(content, filename, type) { const blob = new Blob([content], { type }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); showToast('ดาวน์โหลดไฟล์เรียบร้อย'); }
+    function showDownloadGuide(showToastMsg) { const guide = `Google Apps Script API ควรรองรับ action: list, create, update, delete, ping\n- create/update รับ object doc และ files แบบ base64\n- list ส่งกลับ { records: [...] }\n- Export Excel ใช้ HTML Table + XML Schema ชื่อ Sheet: เอกสาร waneephan\n- รองรับ Excel, Microsoft 365 และเปิดอัปโหลดต่อไปยัง Google Sheets ได้`; document.getElementById('settingsHelp').textContent = guide; if (showToastMsg) showToast('แสดงคำแนะนำ Export แล้ว'); }
+    function saveSettings() { settings.apiUrl = document.getElementById('apiUrl').value.trim(); save(STORAGE_KEYS.settings, settings); showToast('บันทึกการตั้งค่า API แล้ว'); }
+    async function sendToApi(payload) { if (!settings.apiUrl) return null; const res = await fetch(settings.apiUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); if (!res.ok) throw new Error('API HTTP ' + res.status); return res.json(); }
+    async function fetchFromApi() { if (!settings.apiUrl) return showToast('ยังไม่ได้ตั้งค่า Google Apps Script API', false); setLoading(true, 'กำลังดึงข้อมูลล่าสุด...'); try { const result = await sendToApi({ action:'list' }); if (Array.isArray(result?.records)) { docs = result.records; save(STORAGE_KEYS.docs, docs); renderAll(); showToast('ดึงข้อมูลล่าสุดสำเร็จ'); } else throw new Error('รูปแบบข้อมูลไม่ถูกต้อง'); } catch (e) { showToast('ดึงข้อมูลไม่สำเร็จ: ' + e.message, false); } finally { setLoading(false); } }
+    async function testApi() { if (!settings.apiUrl) saveSettings(); try { const result = await sendToApi({ action:'ping' }); showToast('เชื่อมต่อ API สำเร็จ: ' + JSON.stringify(result || {})); } catch (e) { showToast('ทดสอบ API ไม่สำเร็จ: ' + e.message, false); } }
+
+    window.openEdit = openEdit; window.deleteDoc = deleteDoc; window.renameCategoryByIndex = renameCategoryByIndex; window.removeCategoryByIndex = removeCategoryByIndex; window.updateUser = updateUser; window.deleteUser = deleteUser;
+    init();
+  </script>
+</body>
 </html>
